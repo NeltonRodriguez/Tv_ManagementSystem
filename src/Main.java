@@ -1,6 +1,11 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,11 +35,17 @@ public class Main extends JFrame {
     JLabel endCycleLBL;
     JLabel numberTVLBL;
 
+    // Panel #3 --> packagesPanel
+    JCheckBox sportsCHKBX;
+    JCheckBox moviesCHKBX;
+    JCheckBox docCHKBX;
+    JPanel packagesPanel;
+
 
     public Main(){
         // Constructor --> alt + ins
 
-        //              ----------> PANEL #1 <----------
+        //               ---------->    PANEL #1: Subscriber    <----------
         subscriberPanel = new JPanel();
         Border subscriberBorder = BorderFactory.createTitledBorder("Subscriber details");
         subscriberPanel.setBorder(subscriberBorder);
@@ -67,7 +78,7 @@ public class Main extends JFrame {
         subscriberPanel.add(subCity);
 
 
-        //              ----------> PANEL #2 <----------
+        //               ---------->    PANEL #2: Cycle   <----------
         cyclePanel = new JPanel();
         cyclePanel.setBounds(15,230,300,500);
         cyclePanel.setLayout(new GridLayout(14, 1));
@@ -108,23 +119,112 @@ public class Main extends JFrame {
         numberTVFLD.setOpaque(false);
 
 
+        //          ---------->    PANEL #3: Channel's packages    <----------
+        // Ps: CHKBX means 'CheckBox'
+
+
+        packagesPanel = new JPanel();
+        packagesPanel.setBounds(330,150,300,200);
+        packagesPanel.setLayout(new GridLayout(5,1));
+
+        Border packBorder = BorderFactory.createTitledBorder("Available Packages");
+        packagesPanel.setBorder(packBorder);
+
+        JLabel packagesLBL = new JLabel("Please select your package: ");
+        sportsCHKBX = new JCheckBox("Sports package");
+        moviesCHKBX = new JCheckBox("Movies package");
+        docCHKBX = new JCheckBox("Documentary package");
+
+        JButton subscriberBTN = new JButton("Subscribe");
+
+        packagesPanel.add(packagesLBL);
+        packagesPanel.add(sportsCHKBX);
+        packagesPanel.add(moviesCHKBX);
+        packagesPanel.add(docCHKBX);
+        packagesPanel.add(subscriberBTN);
+
+        // Checkbox Item Listener
+        // Ps: In order to create the 'listeners' the syntax is:
+
+        /**
+         * sportsCHKBX.addChangeListener(new ChangeListener);
+         * then we click on 'tab' and IntelIj does the job
+         */
+
+        sportsCHKBX.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (sportsCHKBX.isSelected()){
+                    DisplaySportsChannels();
+                    // Make price changes
+                } else {
+
+                }
+
+            }
+        });
+
+        moviesCHKBX.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (moviesCHKBX.isSelected()){
+                    DisplayMoviesChannels();
+                } else {
+
+                }
+            }
+        });
+
+        docCHKBX.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (docCHKBX.isSelected()){
+                    DisplayDocumentaryChannels();
+                } else {
+
+                }
+            }
+        });
+
+        subscriberBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    GetSubscriberData();
+                }  catch (Exception ee){
+
+                }
+            }
+        });
+
+
         // Adding panels to JFrame
         setLayout(null); // Setting null layout for JFrame
         add(subscriberPanel);
         add(cyclePanel);
-
-
-
-
-
-
+        add(packagesPanel);
 
 
     }
 
-    public static void main(String[] args){
-        Main main = new Main();
-        main.setVisible(true);
-        main.setBounds(100,10,1000,800);
+                                        /********** METHODS **********/
+
+    private void GetSubscriberData() {
+    }
+
+
+
+    private void DisplayDocumentaryChannels() {
+    }
+
+    private void DisplayMoviesChannels() {
+    }
+
+
+    private void DisplaySportsChannels() {
+    }
+
+    public static void main(String[] args) {
+
     }
 }
