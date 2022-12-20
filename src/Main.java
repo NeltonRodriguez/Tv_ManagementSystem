@@ -209,6 +209,7 @@ public class Main extends JFrame {
 
                                         /********** METHODS **********/
 
+
     private void GetSubscriberData() {
     }
 
@@ -225,6 +226,9 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
+        Main mainscreen = new Main();
+        mainscreen.setVisible(true);
+        mainscreen.setBounds(100,10,1000,800);
 
     }
 }
